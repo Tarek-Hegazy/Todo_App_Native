@@ -1,11 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import TodoApp from './Todo-App';
+import TodoApp from "./src/Component/Todo-App";
+
 
 export default function App() {
-  return (
-    <TodoApp />
-  );
+  return <TodoApp />;
 }
 
 // const styles = StyleSheet.create({
