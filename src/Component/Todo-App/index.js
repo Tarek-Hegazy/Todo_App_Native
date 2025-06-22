@@ -5,9 +5,9 @@ import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {NavigationContainer} from "@react-navigation/native"
 
-
-export default function TodoApp() {
+const TodoApp = ()=> {
   const [todos, setTodos] = useState([]);
   useEffect(()=>{
     const loadData = async () => {
@@ -62,7 +62,7 @@ export default function TodoApp() {
   });
 
   return (
-    <View style={styles.container}>
+      <View style={styles.container}>
       <Text
         style={{
           ...styles.text,
@@ -141,10 +141,11 @@ export default function TodoApp() {
         completeTodo={completeTodo}
       />
       <StatusBar style="auto" />
-    </View>
+      </View>
   );
 }
 
+export default TodoApp;
 // const styles = StyleSheet.create({
 //     container: {
 //     flex: 1,
@@ -153,3 +154,5 @@ export default function TodoApp() {
 //     justifyContent: "center",
 //     },
 // });
+
+
