@@ -5,16 +5,23 @@ import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {NavigationContainer} from "@react-navigation/native"
+import { useDispatch, useSelector } from "react-redux";
+import todosSlicer, { setAllTodos } from "./Redux/TodosSlicer";
 
+const TodoApp = ()=> {
 
-export default function TodoApp() {
-  const [todos, setTodos] = useState([]);
+  const todos = useSelector((state) => state.todosState.todos);
+  const dispatch = useDispatch();
+
+  // const [todos, setTodos] = useState(select);
+
   useEffect(()=>{
     const loadData = async () => {
       try {
         const data = await AsyncStorage.getItem("todos");
         if (data !== null) {
-          setTodos(JSON.parse(data));
+          dispatch(setAllTodos(JSON.parse(data)));
         }
       } catch (error) {
         console.log(error);
@@ -41,28 +48,24 @@ export default function TodoApp() {
 
 
   // fun to get todo from todoForm
-  const addTodo = (todo) => {
-    setTodos(prevTodos => [...prevTodos, todo])
-  }
-  const deleteTodo = (todo) => {
-    setTodos((prevTodos) => prevTodos.filter((item) => item.id !== todo.id));
-  }
-  const completeTodo = (todo) => {
-    setTodos((prev) =>
-      prev.map((t) => (t.id === todo.id ? { ...t, complete: !t.complete } : t))
-    );
-  }
+  // const addTodo = (todo) => {
+  //   dispatch(addNewTodo(todo))
+  // }
+  // const deleteTodo = (todo) => {
+  //   dispatch(removeTodo(todo.id))
+  // }
+  // const completeTodo = (todo) => {
+  //   dispatch(completedTodo(todo.id))
+  // }
 
   const [filter, setFilter] = useState("all");
-
   const filteredTodos = todos.filter((todo) => {
     if (filter === "active") return !todo.complete;
     if (filter === "done") return todo.complete;
     return true;
   });
-
   return (
-    <View style={styles.container}>
+      <View style={styles.container}>
       <Text
         style={{
           ...styles.text,
@@ -77,7 +80,7 @@ export default function TodoApp() {
         TODO APP
       </Text>
       {/* Here we send add fun to get it in form page and add todo to */}
-      <TodoForm addTodo={addTodo} />
+      <TodoForm/>
       <View style={styles.dividerLine} />
       <View style={styles.filterContainer}>
         <TouchableOpacity
@@ -137,14 +140,13 @@ export default function TodoApp() {
       </View>
       <TodoList
         todos={filteredTodos}
-        deleteTodo={deleteTodo}
-        completeTodo={completeTodo}
       />
       <StatusBar style="auto" />
-    </View>
+      </View>
   );
 }
 
+export default TodoApp;
 // const styles = StyleSheet.create({
 //     container: {
 //     flex: 1,
@@ -153,3 +155,5 @@ export default function TodoApp() {
 //     justifyContent: "center",
 //     },
 // });
+
+

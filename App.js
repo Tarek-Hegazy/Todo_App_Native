@@ -1,8 +1,9 @@
-import TodoApp from "./src/Component/Todo-App";
+import Router from "./src/Component/Todo-App/Router";
+
 
 
 export default function App() {
-  return <TodoApp />;
+  return <Router />;
 }
 
 // const styles = StyleSheet.create({

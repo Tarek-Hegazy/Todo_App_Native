@@ -74,6 +74,7 @@ export const styles = StyleSheet.create({
   todosContainer: {
     width: "90%",
     marginTop: 20,
+    margin:"auto"
   },
   todoItem: {
     flexDirection: "row",
