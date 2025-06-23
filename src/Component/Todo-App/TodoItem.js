@@ -4,10 +4,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { removeTodo, completedTodo } from "./Redux/TodosSlicer";
+import { useDispatch } from "react-redux";
 
 import TodoDetails from "./TodoDetails";
 import { styles } from "./styles";
-const TodoItem = ({ todo, deleteTodo, completeTodo }) => {
+const TodoItem = ({ todo}) => {
+  
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const navigateToDetails = (todo) => {
@@ -33,7 +37,7 @@ const TodoItem = ({ todo, deleteTodo, completeTodo }) => {
           <TouchableOpacity
             onPress={(e) => {
               e.stopPropagation();
-              completeTodo(todo);
+              dispatch(completedTodo(todo.id));
             }}
           >
             <Ionicons
@@ -46,7 +50,7 @@ const TodoItem = ({ todo, deleteTodo, completeTodo }) => {
           <TouchableOpacity
             onPress={(e) => {
               e.stopPropagation();
-              deleteTodo(todo);
+              dispatch(removeTodo(todo.id));
             }}
           >
             <MaterialIcons name="delete" size={22} color="red" />

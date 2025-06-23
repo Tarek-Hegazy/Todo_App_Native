@@ -69,6 +69,9 @@ const Router = () => {
           options={{
             headerTitle: "Completed Tasks",
             headerTitleAlign: "center",
+            headerTitleStyle : {
+              fontWeight:"bold"
+            },
             tabBarLabel: ({ focused, color }) => (
               <Text
                 style={{

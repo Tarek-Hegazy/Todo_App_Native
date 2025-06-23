@@ -16,8 +16,8 @@ const TodoList = ({ todos, deleteTodo, completeTodo }) => {
           renderItem={({ item }) => (
             <TodoItem
               todo={item}
-              deleteTodo={deleteTodo}
-              completeTodo={completeTodo}
+              // deleteTodo={deleteTodo}
+              // completeTodo={completeTodo}
             />
           )}
         />

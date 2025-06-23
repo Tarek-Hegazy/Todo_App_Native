@@ -3,9 +3,12 @@ import { Text, View, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { TextInput } from "react-native-web";
 import { useState } from "react";
+import { addNewTodo } from "./Redux/TodosSlicer";
 
+import { useDispatch } from "react-redux";
 
-function TodoForm({addTodo}) {
+function TodoForm() {
+    const dispatch = useDispatch();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const handleSubmit = () =>{
@@ -16,7 +19,8 @@ function TodoForm({addTodo}) {
         description: description,
         complete: false,
       };
-      addTodo(newTodo);
+      // addTodo(newTodo);
+      dispatch(addNewTodo(newTodo));
       setTitle("");
       setDescription("");
     }
